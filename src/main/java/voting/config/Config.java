@@ -1,9 +1,8 @@
-package voting_system.config;
+package voting.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import voting_system.model.PollCollection;
-import voting_system.model.UserCollection;
+import voting.storage.PollCollection;
 
 @Configuration
 public class Config {
@@ -11,11 +10,6 @@ public class Config {
     @Bean
     public PollCollection createPollCollection() {
         return new PollCollection();
-    }
-
-    @Bean
-    public UserCollection createUserCollection() {
-        return new UserCollection();
     }
 
 }
