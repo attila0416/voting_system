@@ -2,6 +2,8 @@ package voting.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ public class AdminApiController {
 
     private final PollCollection pollCollection;
     private final ObjectMapper objectMapper;
+    private final Logger logger;
 
     /**
      * Class that controls the API communication between the admin and the server.
@@ -30,10 +33,11 @@ public class AdminApiController {
     public AdminApiController(PollCollection pollCollection) {
         this.pollCollection = pollCollection;
         this.objectMapper = new ObjectMapper();
+        this.logger = LoggerFactory.getLogger(AdminApiController.class);
     }
 
     /**
-     * Method to return a default response when the default path is hit by the admin
+     * Return a default response when the default path is hit by the admin
      *
      * @return a response message
      */
@@ -43,7 +47,7 @@ public class AdminApiController {
     }
 
     /**
-     * Method that creates a poll and the candidates in it.
+     * Creates a poll and the candidates in it.
      *
      * @param jsonString is a JSON in the format of an object of CreatePollRequest.class
      * @return a response message
@@ -54,7 +58,7 @@ public class AdminApiController {
         try {
             request = this.objectMapper.readValue(jsonString, CreatePollRequest.class);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            this.logger.error("Invalid input format.", e);
             return new ResponseEntity<>("Invalid input format.", HttpStatus.BAD_REQUEST);
         }
 
@@ -73,7 +77,7 @@ public class AdminApiController {
     }
 
     /**
-     * Method that closes a poll and returns the information about the closed poll to the admin.
+     * Closes a poll and returns the information about the closed poll to the admin.
      *
      * @param pollName is the name of the poll
      * @return JSON information about the closed poll
@@ -94,7 +98,7 @@ public class AdminApiController {
         try {
             JsonStringResponse = this.objectMapper.writeValueAsString(response);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            this.logger.error("Unable to form the JSON response.", e);
             return new ResponseEntity<>("Unable to form the JSON response.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -102,7 +106,7 @@ public class AdminApiController {
     }
 
     /**
-     * Method that returns the current vote standings of a poll.
+     * Gets the current vote standings of a poll.
      *
      * @param pollName is the name of the poll
      * @return JSON information about the current vote standings of a poll.
@@ -122,7 +126,7 @@ public class AdminApiController {
         try {
             JsonStringResponse = this.objectMapper.writeValueAsString(response);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            this.logger.error("Unable to form the JSON response.", e);
             return new ResponseEntity<>("Unable to form the JSON response.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -130,7 +134,7 @@ public class AdminApiController {
     }
 
     /**
-     * Method that checks whether a user has voted on a certain poll.
+     * Checks whether a user has voted on a certain poll.
      *
      * @param jsonString is a JSON in the format of an object of GetIfUserVotedRequest.class
      * @return JSON information whether a user has voted the specified poll.
@@ -141,7 +145,7 @@ public class AdminApiController {
         try {
             request = this.objectMapper.readValue(jsonString, GetIfUserVotedRequest.class);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            this.logger.error("Invalid input format.", e);
             return new ResponseEntity<>("Invalid input format.", HttpStatus.BAD_REQUEST);
         }
 
@@ -162,7 +166,7 @@ public class AdminApiController {
         try {
             JsonStringResponse = this.objectMapper.writeValueAsString(response);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            this.logger.error("Unable to form the JSON response.", e);
             return new ResponseEntity<>("Unable to form the JSON response.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

@@ -25,7 +25,7 @@ public class PollCollection {
     }
 
     /**
-     * Method for checking whether a poll exists based on its name.
+     * Checks whether a poll exists based on its name.
      *
      * @param pollName is the name of the poll
      * @return whether a poll based on its name exists
@@ -35,7 +35,7 @@ public class PollCollection {
     }
 
     /**
-     * Method that returns a list of polls that is a sublist of all the polls based on the request size and location.
+     * Gets a list of polls that is a sublist of all the polls based on the request size and location.
      *
      * @param startIdx is the starting index position for the polls to be returned
      * @param size     is the amount of polls to be returned in this request
@@ -55,7 +55,7 @@ public class PollCollection {
     }
 
     /**
-     * Method that adds a poll to the rest of the polls.
+     * Adds a poll to the rest of the polls.
      *
      * @param pollName is the name of the poll
      * @param poll     is the poll object that contains all the information about the poll
@@ -65,7 +65,7 @@ public class PollCollection {
     }
 
     /**
-     * Method that removes a poll from the poll collection based on its name.
+     * Removes a poll from the poll collection based on its name.
      *
      * @param pollName is the name of the poll
      * @return the removed poll

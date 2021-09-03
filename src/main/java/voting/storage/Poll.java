@@ -37,7 +37,7 @@ public class Poll implements Comparable<Poll> {
     }
 
     /**
-     * Method that checks whether the user has voted on this poll.
+     * Checks whether the user has voted on this poll.
      *
      * @param user is a user
      * @return whether the user has voted on this poll
@@ -47,7 +47,7 @@ public class Poll implements Comparable<Poll> {
     }
 
     /**
-     * Method that checks whether a candidate exists in this poll based on the candidate's name.
+     * Checks whether a candidate exists in this poll based on the candidate's name.
      *
      * @param candidateName is the name of the candidate
      * @return whether the poll contains a candidate based on its name
@@ -58,7 +58,7 @@ public class Poll implements Comparable<Poll> {
     }
 
     /**
-     * Method that adds the user to the voters of this poll,
+     * Adds the user to the voters of this poll,
      * and increments the number of votes for the given candidate.
      *
      * @param candidate is the candidate the user has voted for in this poll
@@ -70,7 +70,7 @@ public class Poll implements Comparable<Poll> {
     }
 
     /**
-     * Method that converts the candidates Map to a new Map, where the key is the name of the candidate
+     * Converts the candidates Map to a new Map, where the key is the name of the candidate
      * instead of an object of the Candidate.class
      *
      * @return a Map of candidates with the number of votes they received.
@@ -87,7 +87,7 @@ public class Poll implements Comparable<Poll> {
     }
 
     /**
-     * Method that analyses the number of votes and returning the name of the winner candidate.
+     * Analyses the number of votes and returns the name of the winner candidate.
      *
      * @return the name of the winner candidate.
      */

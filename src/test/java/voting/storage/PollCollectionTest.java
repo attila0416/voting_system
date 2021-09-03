@@ -9,14 +9,8 @@ import java.util.Map;
 
 public class PollCollectionTest {
 
-    /**
-     * Tests getPoll() within PollCollection.class
-     */
     @Test
     public void addAndGetPollTest() {
-        /*
-        Variable setup
-         */
         Candidate candidate1 = new Candidate("Tom");
         Map<Candidate, Integer> candidates = new HashMap<>();
         candidates.put(candidate1, 0);
@@ -25,9 +19,6 @@ public class PollCollectionTest {
         Poll poll = new Poll(pollName, candidates);
         PollCollection pollCollection = new PollCollection();
 
-        /*
-        Tests
-         */
         pollCollection.addPoll(pollName, poll);
         Poll returnedPoll = pollCollection.getPoll(pollName);
         Assert.assertEquals(returnedPoll, poll);
@@ -38,9 +29,6 @@ public class PollCollectionTest {
      */
     @Test
     public void existsAndRemovePollTest() {
-        /*
-        Variable setup
-         */
         Candidate candidate1 = new Candidate("Tom");
         Map<Candidate, Integer> candidates = new HashMap<>();
         candidates.put(candidate1, 0);
@@ -49,9 +37,6 @@ public class PollCollectionTest {
         Poll poll = new Poll(pollName, candidates);
         PollCollection pollCollection = new PollCollection();
 
-        /*
-        Tests
-         */
         pollCollection.addPoll(pollName, poll);
         boolean pollExists = pollCollection.checkPollExists(pollName);
         Assert.assertTrue(pollExists);
@@ -68,9 +53,6 @@ public class PollCollectionTest {
      */
     @Test
     public void getPollsSliceTest() {
-        /*
-        Variable setup
-         */
         Candidate candidate1 = new Candidate("Tom");
         Candidate candidate2 = new Candidate("Bob");
         Candidate candidate3 = new Candidate("Jim");
@@ -87,9 +69,6 @@ public class PollCollectionTest {
         Poll poll3 = new Poll(pollName3, candidates);
         PollCollection pollCollection = new PollCollection();
 
-        /*
-        Tests
-         */
         pollCollection.addPoll(pollName1, poll2);
         pollCollection.addPoll(pollName2, poll2);
         pollCollection.addPoll(pollName3, poll3);
@@ -102,6 +81,5 @@ public class PollCollectionTest {
 
         Assert.assertEquals(polls.get(0).getPollName(), pollName3);
     }
-
 
 }

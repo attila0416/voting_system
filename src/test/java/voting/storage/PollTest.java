@@ -13,9 +13,6 @@ public class PollTest {
      */
     @Test
     public void doesCandidateExistTest() {
-        /*
-        Variable setup
-         */
         String candidateName = "Tom";
         Candidate candidate = new Candidate(candidateName);
         Map<Candidate, Integer> candidates = new HashMap<>();
@@ -23,9 +20,6 @@ public class PollTest {
         String pollName = "School Captain";
         Poll poll = new Poll(pollName, candidates);
 
-        /*
-        Tests
-         */
         boolean candidateExists = poll.doesCandidateExist(candidateName);
         Assert.assertTrue(candidateExists);
 
@@ -38,9 +32,6 @@ public class PollTest {
      */
     @Test
     public void placeVoteTest() {
-        /*
-        Variable setup
-         */
         String candidateName = "Tom";
         Candidate candidate = new Candidate(candidateName);
         Map<Candidate, Integer> candidates = new HashMap<>();
@@ -52,9 +43,6 @@ public class PollTest {
         String userName = "Jerry";
         User user = new User(userName);
 
-        /*
-        Tests
-         */
         poll.placeVote(candidate, user);
         boolean votePlaced = poll.hasUserVoted(user);
         Assert.assertTrue(votePlaced);
@@ -67,14 +55,8 @@ public class PollTest {
         Assert.assertEquals(assumedVotes, actualVotes);
     }
 
-    /**
-     * Tests getWinner() within Poll.class
-     */
     @Test
     public void getWinnerTest() {
-        /*
-        Variable setup
-         */
         Candidate candidate1 = new Candidate("Tom");
         Candidate candidate2 = new Candidate("Bob");
         Candidate candidate3 = new Candidate("Jim");
@@ -86,9 +68,6 @@ public class PollTest {
         String pollName = "School Captain";
         Poll poll = new Poll(pollName, candidates);
 
-        /*
-        Tests
-         */
         String winnerCandidate = poll.getWinner();
         Assert.assertEquals(winnerCandidate, "Jim");
     }

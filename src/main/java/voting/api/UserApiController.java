@@ -2,6 +2,8 @@ package voting.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ public class UserApiController {
 
     private final PollCollection pollCollection;
     private final ObjectMapper objectMapper;
+    private final Logger logger;
 
     /**
      * Class that controls the API communication between the user and the server.
@@ -30,10 +33,11 @@ public class UserApiController {
     public UserApiController(PollCollection pollCollection) {
         this.pollCollection = pollCollection;
         this.objectMapper = new ObjectMapper();
+        this.logger = LoggerFactory.getLogger(UserApiController.class);
     }
 
     /**
-     * Method the polls are returned depending on how many the user asks for.
+     * Gets polls depending on how many the user asks for.
      *
      * @param jsonString is a JSON in the format of an object of GetPollsRequest.class
      * @return a JSON response message in the format of an object of GetPollsResponse.class
@@ -44,7 +48,7 @@ public class UserApiController {
         try {
             request = this.objectMapper.readValue(jsonString, GetPollsRequest.class);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            this.logger.error("Invalid input format.", e);
             return new ResponseEntity<>("Invalid input format.", HttpStatus.BAD_REQUEST);
         }
 
@@ -60,7 +64,7 @@ public class UserApiController {
         try {
             pollsJsonString = this.objectMapper.writeValueAsString(polls);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            this.logger.error("Unable to form the JSON response.", e);
             return new ResponseEntity<>("Unable to form the JSON response.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -68,7 +72,7 @@ public class UserApiController {
     }
 
     /**
-     * Method where the user places a vote on the given candidate in the given poll.
+     * User places a vote on the given candidate in the given poll.
      *
      * @param jsonString in the format of an object of PlaceVoteRequest.class
      * @return a response message
@@ -79,7 +83,7 @@ public class UserApiController {
         try {
             vote = this.objectMapper.readValue(jsonString, PlaceVoteRequest.class);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            this.logger.error("Invalid input format.", e);
             return new ResponseEntity<>("Invalid input format.", HttpStatus.BAD_REQUEST);
         }
 
